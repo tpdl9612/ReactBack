@@ -38,9 +38,9 @@ public class ArticleServiceImplement implements ArticleService {
     @Override
     public ResponseEntity<? super PostArticleResponseDto> postArticle(PostArticleRequestDto dto) {
         try {
-            ArticleEntity questionEntity = new ArticleEntity(dto);
+            ArticleEntity articleEntity = new ArticleEntity(dto);
 
-            articleRepository.save(questionEntity);
+            articleRepository.save(articleEntity);
 
         } catch (Exception exception) {
             exception.printStackTrace();

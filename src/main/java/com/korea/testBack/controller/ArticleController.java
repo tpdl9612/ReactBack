@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/article")
+@RequestMapping("/api/v1")
 public class ArticleController {
     private final ArticleService articleService;
 
-    @PostMapping("/write")
+    @PostMapping("/article/write")
     public ResponseEntity<? super PostArticleResponseDto> postArticle(
             @RequestBody @Valid PostArticleRequestDto requestBody
     ) {
@@ -25,13 +25,13 @@ public class ArticleController {
         return response;
     }
 
-    @GetMapping("")
+    @GetMapping("/")
     public ResponseEntity<? super GetAllArticleResponseDto> getAllArticle() {
         ResponseEntity<? super GetAllArticleResponseDto> response = articleService.getAllArticle();
         return response;
     }
 
-    @GetMapping("/detail/{articleId}")
+    @GetMapping("/article/detail/{articleId}")
     public ResponseEntity<? super GetArticleResponseDto> getArticle(
             @PathVariable("articleId") Long articleId
     ) {
@@ -39,7 +39,7 @@ public class ArticleController {
         return response;
     }
 
-    @DeleteMapping("/delete/{articleId}")
+    @DeleteMapping("/article/delete/{articleId}")
     public ResponseEntity<? super DeleteArticleResponseDto> deleteArticle(
             @PathVariable("articleId") Long articleId
     ) {

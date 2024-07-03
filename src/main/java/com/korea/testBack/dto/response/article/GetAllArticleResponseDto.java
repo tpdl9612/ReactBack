@@ -4,11 +4,13 @@ import com.korea.testBack.common.ResponseCode;
 import com.korea.testBack.common.ResponseMessage;
 import com.korea.testBack.dto.response.ResponseDto;
 import com.korea.testBack.entity.ArticleEntity;
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
+@Getter
 public class GetAllArticleResponseDto extends ResponseDto {
     private List<ArticleEntity> articles;
 
