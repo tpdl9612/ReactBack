@@ -1,6 +1,7 @@
 package com.korea.testBack.entity;
 
 
+import com.korea.testBack.dto.request.article.PatchArticleRequestDto;
 import com.korea.testBack.dto.request.article.PostArticleRequestDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -36,5 +37,9 @@ public class ArticleEntity {
         this.content = dto.getContent();
         this.createdAt = LocalDate.now();
 
+    }
+    public void patchArticle(PatchArticleRequestDto dto){
+        this.title= dto.getTitle();
+        this.content = dto.getContent();
     }
 }

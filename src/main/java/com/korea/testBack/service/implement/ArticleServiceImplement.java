@@ -1,11 +1,9 @@
 package com.korea.testBack.service.implement;
 
+import com.korea.testBack.dto.request.article.PatchArticleRequestDto;
 import com.korea.testBack.dto.request.article.PostArticleRequestDto;
 import com.korea.testBack.dto.response.ResponseDto;
-import com.korea.testBack.dto.response.article.DeleteArticleResponseDto;
-import com.korea.testBack.dto.response.article.GetAllArticleResponseDto;
-import com.korea.testBack.dto.response.article.GetArticleResponseDto;
-import com.korea.testBack.dto.response.article.PostArticleResponseDto;
+import com.korea.testBack.dto.response.article.*;
 import com.korea.testBack.entity.ArticleEntity;
 import com.korea.testBack.repository.ArticleRepository;
 import com.korea.testBack.service.ArticleService;
@@ -75,5 +73,20 @@ public class ArticleServiceImplement implements ArticleService {
             return ResponseDto.databaseError();
         }
         return GetAllArticleResponseDto.success(articles);
+    }
+    @Override
+    public ResponseEntity<? super PatchArticleResponseDto> patchArticle(PatchArticleRequestDto dto, Long ArticleId) {
+        try {
+            ArticleEntity articleEntity = articleRepository.findByArticleId(ArticleId);
+            if (articleEntity == null) return PatchArticleResponseDto.notExistArticle();
+
+            articleEntity.patchArticle(dto);
+            articleRepository.save(articleEntity);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+        return PatchArticleResponseDto.success();
     }
 }

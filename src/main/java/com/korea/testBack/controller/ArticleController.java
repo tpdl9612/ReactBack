@@ -1,10 +1,8 @@
 package com.korea.testBack.controller;
 
+import com.korea.testBack.dto.request.article.PatchArticleRequestDto;
 import com.korea.testBack.dto.request.article.PostArticleRequestDto;
-import com.korea.testBack.dto.response.article.DeleteArticleResponseDto;
-import com.korea.testBack.dto.response.article.GetAllArticleResponseDto;
-import com.korea.testBack.dto.response.article.GetArticleResponseDto;
-import com.korea.testBack.dto.response.article.PostArticleResponseDto;
+import com.korea.testBack.dto.response.article.*;
 import com.korea.testBack.service.ArticleService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -44,6 +42,15 @@ public class ArticleController {
             @PathVariable("articleId") Long articleId
     ) {
         ResponseEntity<? super DeleteArticleResponseDto> response = articleService.deleteArticle(articleId);
+        return response;
+    }
+
+    @PatchMapping("/article/update/{articleId}")
+    public ResponseEntity<? super PatchArticleResponseDto> updateArticle (
+            @RequestBody @Valid PatchArticleRequestDto requestBody,
+            @PathVariable("articleId") Long articleId
+    ) {
+        ResponseEntity<? super PatchArticleResponseDto> response = articleService.patchArticle(requestBody, articleId);
         return response;
     }
 }
